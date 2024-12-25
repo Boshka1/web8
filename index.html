@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Форма обратной связи</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button id="open-form">Открыть форму</button>
+
+<div id="popup-form" class="popup-form hidden">
+  <div class="popup-content">
+    <button id="close-form">&times;</button>
+    <h2>Форма обратной связи</h2>
+    <form id="feedback-form">
+      <input type="text" id="fio" placeholder="ФИО" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <input type="tel" id="phone" placeholder="Телефон">
+      <input type="text" id="organization" placeholder="Организация">
+      <textarea id="message" placeholder="Сообщение" required></textarea>
+      <div class="checkbox-container">
+        <input type="checkbox" id="privacy-policy" required>
+        <label for="privacy-policy">Согласен с <a href="#" target="_blank">политикой обработки персональных данных</a></label>
+      </div>
+      <button type="submit">Отправить</button>
+      <div id="form-message"></div>
+    </form>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
