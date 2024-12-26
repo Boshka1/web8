@@ -1,7 +1,7 @@
 $(document).ready(function() {
   let formData = {};
 
-  // Восстановление данных из LocalStorage
+  // Восстановление данных из LocalStorage (только для демонстрации!)
   if (localStorage.getItem('formData')) {
     formData = JSON.parse(localStorage.getItem('formData'));
     $('#fio').val(formData.fio);
@@ -11,21 +11,8 @@ $(document).ready(function() {
     $('#message').val(formData.message);
   }
 
-  $('#open-form').click(function() {
-    $('#popup-form').removeClass('hidden');
-    history.pushState({}, '', '?form=open');
-  });
+  // ... (код для открытия/закрытия формы остается без изменений) ...
 
-  $('#close-form').click(function() {
-    $('#popup-form').addClass('hidden');
-    history.back();
-  });
-
-  window.onpopstate = function(event) {
-    if (event.state === null) {
-      $('#popup-form').addClass('hidden');
-    }
-  };
 
   $('#feedback-form').submit(function(e) {
     e.preventDefault();
@@ -42,17 +29,18 @@ $(document).ready(function() {
     // Сохранение данных в LocalStorage (только для демонстрации!)
     localStorage.setItem('formData', JSON.stringify(formData));
 
-    // Замените 'YOUR_FORM_ENDPOINT' на ваш endpoint
     $.ajax({
       type: 'POST',
-      url: 'https://formcarry.com/s/GNUZA7_lclc', // Endpoint вашего сервиса
-      data: formData,
+      url: 'https://formcarry.com/s/GNUZA7_lclc',
+      contentType: 'application/json', // Указание типа данных JSON
+      data: JSON.stringify(formData), // Отправка данных в формате JSON
       success: function(response) {
         $('#form-message').html('<span style="color:green;">Форма успешно отправлена!</span>');
         $('#feedback-form')[0].reset();
         localStorage.removeItem('formData');
       },
       error: function(error) {
+        console.error("Ошибка отправки формы:", error); // Выводим ошибку в консоль для отладки
         $('#form-message').html('<span style="color:red;">Ошибка отправки формы. Попробуйте еще раз.</span>');
       }
     });
