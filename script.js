@@ -45,7 +45,7 @@ $(document).ready(function() {
     // Замените 'YOUR_FORM_ENDPOINT' на ваш endpoint
     $.ajax({
       type: 'POST',
-      url: 'YOUR_FORM_ENDPOINT', // Endpoint вашего сервиса
+      url: 'https://formcarry.com/s/GNUZA7_lclc', // Endpoint вашего сервиса
       data: formData,
       success: function(response) {
         $('#form-message').html('<span style="color:green;">Форма успешно отправлена!</span>');
