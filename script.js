@@ -10,7 +10,20 @@ $(document).ready(function() {
     $('#organization').val(formData.organization);
     $('#message').val(formData.message);
   }
-
+  
+$('#open-form').click(function() {
+    $('#popup-form').removeClass('hidden');
+    history.pushState({}, '', '?form=open');
+  });
+  $('#close-form').click(function() {
+    $('#popup-form').addClass('hidden');
+    history.back();
+  });
+  window.onpopstate = function(event) {
+    if (event.state === null) {
+      $('#popup-form').addClass('hidden');
+    }
+  };
   // ... (код для открытия/закрытия формы остается без изменений) ...
 
 
@@ -30,6 +43,8 @@ $(document).ready(function() {
     localStorage.setItem('formData', JSON.stringify(formData));
 
     $.ajax({
+      url: 'https://formcarry.com/s/GNUZA7_lclc', // Endpoint вашего сервиса
+      data: formData,
       type: 'POST',
       url: 'https://formcarry.com/s/GNUZA7_lclc',
       contentType: 'application/json', // Указание типа данных JSON
